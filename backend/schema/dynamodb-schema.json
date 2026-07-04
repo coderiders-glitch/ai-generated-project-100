@@ -1,0 +1,96 @@
+{
+  "Tables": [
+    {
+      "TableName": "UserQueries",
+      "KeySchema": [
+        {
+          "AttributeName": "queryId",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "queryId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "userId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "timestamp",
+          "AttributeType": "N"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "UserIdIndex",
+          "KeySchema": [
+            {
+              "AttributeName": "userId",
+              "KeyType": "HASH"
+            },
+            {
+              "AttributeName": "timestamp",
+              "KeyType": "RANGE"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "BillingMode": "PAY_PER_REQUEST"
+        }
+      ],
+      "BillingMode": "PAY_PER_REQUEST",
+      "StreamSpecification": {
+        "StreamEnabled": false
+      }
+    },
+    {
+      "TableName": "ChatbotResponses",
+      "KeySchema": [
+        {
+          "AttributeName": "responseId",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "responseId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "queryId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "timestamp",
+          "AttributeType": "N"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "QueryIdIndex",
+          "KeySchema": [
+            {
+              "AttributeName": "queryId",
+              "KeyType": "HASH"
+            },
+            {
+              "AttributeName": "timestamp",
+              "KeyType": "RANGE"
+            }
+          ],
+          "Projection": {
+            "ProjectionType": "ALL"
+          },
+          "BillingMode": "PAY_PER_REQUEST"
+        }
+      ],
+      "BillingMode": "PAY_PER_REQUEST",
+      "StreamSpecification": {
+        "StreamEnabled": false
+      }
+    }
+  ]
+}
